@@ -1,0 +1,39 @@
+{
+  "buildings" : [ {
+    "name" : "teste",
+    "description" : "desc",
+    "category" : "Field",
+    "baseEfficiency" : 1.0,
+    "baseDegradationRate" : 1.0,
+    "buildingCost" : [ {
+      "item_name" : "Wood",
+      "count" : 1.0,
+      "probability" : 1.0
+    } ],
+    "n_upgrades" : 0,
+    "upgrades" : [ ],
+    "recipeHandler" : {
+      "baseNumOperations" : 0,
+      "baseRecipeCategories" : [ ]
+    },
+    "type" : "ProductionBuildingType"
+  }, {
+    "name" : "BuildA",
+    "description" : "ajsd",
+    "category" : "production",
+    "baseEfficiency" : 1.0,
+    "baseDegradationRate" : 0.1,
+    "buildingCost" : [ {
+      "item_name" : "itemA",
+      "count" : 1.0,
+      "probability" : 1.0
+    } ],
+    "n_upgrades" : 1,
+    "upgrades" : [ "upgrade1" ],
+    "recipeHandler" : {
+      "baseNumOperations" : 0,
+      "baseRecipeCategories" : [ ]
+    },
+    "type" : "ProductionBuildingType"
+  } ]
+}

@@ -1,0 +1,52 @@
+{
+  "Wood" : {
+    "name" : "Wood",
+    "category" : "Raw Material",
+    "weight" : 10.0,
+    "isDurable" : true,
+    "isStorable" : true,
+    "storageSpace" : 1.0,
+    "howLongToGoBad" : 50.0,
+    "isTransportable" : true
+  },
+  "Coal" : {
+    "name" : "Coal",
+    "category" : "Raw Material",
+    "weight" : 8.0,
+    "isDurable" : true,
+    "isStorable" : true,
+    "storageSpace" : 1.0,
+    "howLongToGoBad" : 100.0,
+    "isTransportable" : true
+  },
+  "Stone" : {
+    "name" : "Stone",
+    "category" : "Raw Material",
+    "weight" : 10.0,
+    "isDurable" : true,
+    "isStorable" : true,
+    "storageSpace" : 1.0,
+    "howLongToGoBad" : 50.0,
+    "isTransportable" : true
+  },
+  "Barley seed" : {
+    "name" : "Barley seed",
+    "category" : "Seed",
+    "weight" : 0.1,
+    "isDurable" : true,
+    "isStorable" : true,
+    "storageSpace" : 0.1,
+    "howLongToGoBad" : 12.0,
+    "isTransportable" : true
+  },
+  "Weat seed" : {
+    "name" : "Weat seed",
+    "category" : "Seed",
+    "weight" : 0.1,
+    "isDurable" : true,
+    "isStorable" : true,
+    "storageSpace" : 0.1,
+    "howLongToGoBad" : 12.0,
+    "isTransportable" : true
+  }
+}

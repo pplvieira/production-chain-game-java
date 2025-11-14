@@ -1,0 +1,27 @@
+[ {
+  "name" : "teste",
+  "description" : "",
+  "category" : "",
+  "baseEfficiency" : 1.0,
+  "baseDegradationRate" : 1.0,
+  "buildingCost" : [ ],
+  "n_upgrades" : 1,
+  "upgrades" : [ ],
+  "baseNumOperations" : 1,
+  "baseRecipeCategories" : [ ],
+  "availableRecipes" : [ ],
+  "type" : "ProductionBuildingType"
+}, {
+  "name" : "",
+  "description" : "",
+  "category" : "",
+  "baseEfficiency" : 1.0,
+  "baseDegradationRate" : 1.0,
+  "buildingCost" : [ ],
+  "n_upgrades" : 3,
+  "upgrades" : [ ],
+  "baseNumOperations" : 1,
+  "baseRecipeCategories" : [ ],
+  "availableRecipes" : [ ],
+  "type" : "ProductionBuildingType"
+} ]

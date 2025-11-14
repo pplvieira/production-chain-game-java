@@ -1,0 +1,18 @@
+{
+  "buildings" : [ {
+    "name" : "teste",
+    "description" : "desc",
+    "category" : "Field",
+    "baseEfficiency" : 1.0,
+    "baseDegradationRate" : 1.0,
+    "buildingCost" : [ {
+      "item_name" : "Wood",
+      "count" : 1.0,
+      "probability" : 1.0
+    } ],
+    "n_upgrades" : 0,
+    "upgrades" : [ ],
+    "baseNumOperations" : 1,
+    "baseRecipeCategories" : [ ]
+  } ]
+}

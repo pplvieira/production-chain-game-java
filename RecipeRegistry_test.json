@@ -1,0 +1,61 @@
+[ {
+  "name" : "Chop wood",
+  "category" : "Basic silviculture",
+  "description" : "--",
+  "n_ingredients" : 0,
+  "n_outputs" : 1,
+  "duration" : 1.0,
+  "enabled" : true,
+  "ingredientslist" : [ ],
+  "outputslist" : [ {
+    "item_name" : "Wood",
+    "count" : 1.0,
+    "probability" : 1.0
+  } ]
+}, {
+  "name" : "Mine stone",
+  "category" : "Basic mining",
+  "description" : "--",
+  "n_ingredients" : 0,
+  "n_outputs" : 1,
+  "duration" : 1.0,
+  "enabled" : true,
+  "ingredientslist" : [ ],
+  "outputslist" : [ {
+    "item_name" : "Stone",
+    "count" : 10.0,
+    "probability" : 1.0
+  } ]
+}, {
+  "name" : "Mine coal",
+  "category" : "Basic mining",
+  "description" : "--",
+  "n_ingredients" : 0,
+  "n_outputs" : 1,
+  "duration" : 1.0,
+  "enabled" : true,
+  "ingredientslist" : [ ],
+  "outputslist" : [ {
+    "item_name" : "Coal",
+    "count" : 5.0,
+    "probability" : 1.0
+  } ]
+}, {
+  "name" : "Charcoal",
+  "category" : "Basic kiln",
+  "description" : "--",
+  "n_ingredients" : 1,
+  "n_outputs" : 1,
+  "duration" : 1.0,
+  "enabled" : true,
+  "ingredientslist" : [ {
+    "item_name" : "Wood",
+    "count" : 2.0,
+    "probability" : 1.0
+  } ],
+  "outputslist" : [ {
+    "item_name" : "Coal",
+    "count" : 3.0,
+    "probability" : 1.0
+  } ]
+} ]

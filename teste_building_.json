@@ -1,0 +1,33 @@
+[ {
+  "typeName" : "teste",
+  "owner" : "Pedro!",
+  "condition" : 100.0,
+  "storage" : {
+    "capacity" : 10.0,
+    "items" : { }
+  },
+  "activeRecipe" : null,
+  "ycoord" : 0,
+  "xcoord" : 0,
+  "instanceType" : "ProductionBuildingInstance"
+}, {
+  "typeName" : "",
+  "owner" : "Player2",
+  "condition" : 100.0,
+  "storage" : {
+    "capacity" : 5.0,
+    "items" : {
+      "Wood" : [ {
+        "quantity" : 1.0,
+        "durability" : 5.0
+      }, {
+        "quantity" : 4.0,
+        "durability" : 5.0
+      } ]
+    }
+  },
+  "activeRecipe" : null,
+  "ycoord" : 25,
+  "xcoord" : 15,
+  "instanceType" : "ProductionBuildingInstance"
+} ]

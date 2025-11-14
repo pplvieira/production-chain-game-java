@@ -1,0 +1,14 @@
+[ {
+  "typeName" : "Vacaria",
+  "owner" : "Pedro",
+  "activeRecipe" : null,
+  "cleanliness" : 100.0,
+  "condition" : 100.0,
+  "storage" : {
+    "capacity" : 10.0,
+    "items" : { }
+  },
+  "instanceType" : "AnimalBuildingInstance",
+  "xcoord" : 0,
+  "ycoord" : 0
+} ]

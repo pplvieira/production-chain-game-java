@@ -1,0 +1,49 @@
+[ {
+  "typeName" : "Hut",
+  "owner" : "Player1",
+  "condition" : 100.0,
+  "storage" : {
+    "capacity" : 10.0,
+    "items" : {
+      "Wood" : [ {
+        "quantity" : 1.0,
+        "durability" : 10.0
+      } ]
+    }
+  },
+  "activeRecipe" : null,
+  "ycoord" : 0,
+  "xcoord" : 0,
+  "instanceType" : "ProductionBuildingInstance"
+}, {
+  "typeName" : "Kiln",
+  "owner" : "Player1",
+  "condition" : 100.0,
+  "storage" : {
+    "capacity" : 20.0,
+    "items" : {
+      "Wood" : [ {
+        "quantity" : 1.0,
+        "durability" : 10.0
+      } ]
+    }
+  },
+  "activeRecipe" : {
+    "name" : "Chop wood",
+    "category" : "Basic silviculture",
+    "description" : "--",
+    "n_ingredients" : 0,
+    "n_outputs" : 1,
+    "duration" : 1.0,
+    "enabled" : true,
+    "ingredientslist" : [ ],
+    "outputslist" : [ {
+      "item_name" : "Wood",
+      "count" : 1.0,
+      "probability" : 1.0
+    } ]
+  },
+  "ycoord" : 0,
+  "xcoord" : 1,
+  "instanceType" : "ProductionBuildingInstance"
+} ]

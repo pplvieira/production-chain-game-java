@@ -1,0 +1,19 @@
+{
+  "capacity" : 10.0,
+  "items" : {
+    "Wood" : [ {
+      "quantity" : 3.0,
+      "durability" : 1.0
+    }, {
+      "quantity" : 2.0,
+      "durability" : 2.0
+    }, {
+      "quantity" : 2.0,
+      "durability" : 1.0
+    } ],
+    "Coal" : [ {
+      "quantity" : 3.0,
+      "durability" : 2.0
+    } ]
+  }
+}

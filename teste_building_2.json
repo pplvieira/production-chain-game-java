@@ -1,0 +1,52 @@
+[ {
+  "typeName" : "TesteAllA",
+  "owner" : "Pedro",
+  "condition" : 100.0,
+  "storage" : {
+    "capacity" : 15.0,
+    "items" : {
+      "Wood" : [ {
+        "quantity" : 9.0,
+        "durability" : 10.0
+      } ]
+    }
+  },
+  "activeRecipe" : null,
+  "instanceType" : "ProductionBuildingInstance",
+  "ycoord" : 3,
+  "xcoord" : 0
+}, {
+  "typeName" : "TesteAllB",
+  "owner" : "Pedro",
+  "condition" : 100.0,
+  "storage" : {
+    "capacity" : 15.0,
+    "items" : {
+      "Wood" : [ {
+        "quantity" : 1.0,
+        "durability" : 10.0
+      }, {
+        "quantity" : 1.0,
+        "durability" : 10.0
+      } ]
+    }
+  },
+  "activeRecipe" : {
+    "name" : "Chop wood",
+    "category" : "Basic silviculture",
+    "description" : "--",
+    "n_ingredients" : 0,
+    "n_outputs" : 1,
+    "duration" : 1.0,
+    "enabled" : true,
+    "ingredientslist" : [ ],
+    "outputslist" : [ {
+      "item_name" : "Wood",
+      "count" : 1.0,
+      "probability" : 1.0
+    } ]
+  },
+  "instanceType" : "ProductionBuildingInstance",
+  "ycoord" : 4,
+  "xcoord" : 0
+} ]

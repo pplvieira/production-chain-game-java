@@ -1,0 +1,22 @@
+[ {
+  "name" : "Galinheiro",
+  "description" : "-",
+  "category" : "Galinheiro",
+  "baseEfficiency" : 1.0,
+  "baseDegradationRate" : 1.0,
+  "buildingCost" : [ {
+    "item_name" : "Wood",
+    "count" : 1.0,
+    "probability" : 1.0
+  } ],
+  "n_upgrades" : 0,
+  "upgrades" : [ ],
+  "optimalHousingSpace" : 10.0,
+  "maximumHousingSpace" : 25.0,
+  "allowedAnimals" : [ "Cow" ],
+  "recipeHandler" : {
+    "baseNumOperations" : 0,
+    "baseRecipeCategories" : [ ]
+  },
+  "type" : "AnimalBuildingType"
+} ]

@@ -1,0 +1,23 @@
+[ {
+  "name" : "",
+  "category" : "",
+  "description" : "",
+  "n_ingredients" : 1,
+  "n_outputs" : 1,
+  "duration" : 0.0,
+  "enabled" : false,
+  "ingredientslist" : {
+    "ingredientslist" : [ {
+      "item_name" : "",
+      "count" : 1.0,
+      "probability" : 1.0
+    } ]
+  },
+  "outputslist" : {
+    "ingredientslist" : [ {
+      "item_name" : "",
+      "count" : 1.0,
+      "probability" : 1.0
+    } ]
+  }
+} ]
