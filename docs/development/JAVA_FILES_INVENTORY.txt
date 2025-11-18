@@ -1,0 +1,312 @@
+JAVA SOURCE FILES INVENTORY
+============================
+
+TOTAL: 33 files, ~4,214 lines of code
+
+BUILDINGS PACKAGE (com.productionchain.buildings) - 7 files
+================================================================================
+1. BuildingType.java (204 lines)
+   - Abstract base class for all building types
+   - Fields: name, description, category, efficiency, degradation, cost, upgrades
+   - Contains: RecipeHandler for recipe management
+   - Provides: getAvailableRecipes(), canRunRecipe()
+   - Annotations: @JsonTypeInfo, @JsonSubTypes for polymorphic JSON
+
+2. ProductionBuildingType.java (285 lines) 
+   - Extends BuildingType for production/crafting buildings
+   - Constructor takes RecipeHandler for recipe categories
+   - Methods: loadProductionBuildingTypes(), saveProductionBuildingTypes()
+   - Inner class: ProductionBuildingConfig1 (wrapper for JSON serialization)
+   - NOTES: Has hardcoded file paths, uses JFileChooser
+
+3. AnimalBuildingType.java (103 lines)
+   - Extends BuildingType for animal housing buildings
+   - Fields: optimalHousingSpace, maximumHousingSpace, allowedAnimals
+   - Getters/Setters for housing management
+   - NOTES: Partially complete
+
+4. BuildingInstance.java (303 lines)
+   - Abstract base class for all building instances
+   - Fields: type, typeName, owner, x/y coordinates, condition, storage, activeRecipe
+   - Contains: AdvancedStorage for items
+   - Key Methods:
+     * performRecipe() - executes active recipe
+     * hasAllIngredientsForRecipe() - validates ingredients
+     * hasStorageSpaceForRecipe() - validates space
+     * updateNextTurn() - abstract turn update
+   - Annotations: @JsonTypeInfo, @JsonSubTypes for polymorphism
+   - CRITICAL ISSUE: Loads registry during @JsonSetter (poor design)
+
+5. ProductionBuildingInstance.java (133 lines)
+   - Extends BuildingInstance for production building instances
+   - Fields: activeRecipeStr (legacy field)
+   - Methods: updateNextTurn() (mostly stub)
+   - Provides test execution in main()
+
+6. AnimalBuildingInstance.java (163 lines)
+   - Extends BuildingInstance for animal housing instances
+   - Fields: housedAnimals (ArrayList), cleanliness
+   - Key Methods:
+     * addHousedAnimal() - add animal to housing
+     * getSummaryStatistics() - aggregate animal stats (age, satisfaction, etc.)
+   - INCOMPLETE: updateNextTurn() throws UnsupportedOperationException
+
+7. BuildingTypeList.java (211 lines)
+   - Generic container class for building types: class BuildingTypeList<T extends BuildingType>
+   - Key Methods:
+     * getBuildingByName() - lookup by name
+     * getBuildingsByCategory() - filter by category
+     * loadFromJson() - deserialize from file
+     * saveToJson() - serialize to file
+   - Uses Jackson ObjectMapper for JSON handling
+   - Provides test cases in main()
+
+
+MECHANICS PACKAGE (com.productionchain.mechanics) - 8 files
+================================================================================
+8. RecipeHandler.java (96 lines)
+   - Implements recipe management for buildings
+   - Fields: baseNumOperations, baseRecipeCategories (List<String>)
+   - Key Methods:
+     * canRunRecipe() - checks if category allowed
+     * getAvailableRecipes() - filters from RecipeRegistry by category
+   - Used BY: BuildingType (contained as field)
+   - NOTES: Simple filter wrapper around RecipeRegistry
+
+9. RecipeSystem.java (102 lines)
+   - MOSTLY SCRAPPED/COMMENTED OUT (~60% commented)
+   - Intended for BuildingInstance recipe logic
+   - Current state: nearly all code disabled
+   - RECOMMENDATION: Delete this file
+
+10. Storage.java (187 lines)
+    - Basic storage container with capacity limits
+    - Fields: capacity (double), storedItems (Map<String, Double>), allowedItems
+    - Key Methods:
+      * addItem() - simple add
+      * addItemCheckCapacity() - validates space and allowed items
+      * removeItem() - FIFO removal
+      * hasItem() - quantity check
+      * hasIngredients() - recipe validation
+      * getUsedCapacity() - sum of stored quantities
+    - JSON support: loadFromJson(), saveToJson()
+    - NOTES: Not used in favor of AdvancedStorage
+
+11. AdvancedStorage.java (289 lines)
+    - Advanced storage with item batch tracking and durability
+    - Fields: capacity (double), items (Map<String, List<ItemBatch>>), allowedItems
+    - Inner Class: ItemBatch (quantity + durability)
+    - Key Methods:
+      * addItem() - adds batch with durability
+      * addItemCheckCapacity() - validates space
+      * removeItem() - FIFO removal across batches
+      * degradeItems() - decreases durability, removes spoiled items
+      * getUsedCapacity() - sums all batch quantities
+      * hasItem() - checks total available quantity
+    - Used BY: BuildingInstance (default storage)
+    - NOTES: Well-implemented FIFO spoilage system
+
+12. AnimalType.java (155 lines)
+    - Defines animal species blueprint
+    - Fields: name, description, spaceOccupied, timeToMaturity, timeToReproductiveAge, lifeSpan
+    - Fields: essencialFoods, preferredFoods, acceptedFoods (IngredientsList)
+    - Fields: minFoodRequirement, optimalFoodRequirement, minFoodProductivity
+    - Fields: productionPerMonth, lootWhenKilled (IngredientsList)
+    - NOTES: Comprehensive animal model with food requirements and production
+
+13. AnimalInstance.java (109 lines)
+    - Individual animal instance
+    - Fields: type, typeName, x/y, owner, gender, state, age, satisfaction, productivity, health
+    - Gender: randomized male/female on creation
+    - State: "alive", "sick", "pregnant", "dead" (string-based, could use enum)
+    - Key Methods:
+      * getters/setters for all stats
+      * resolveType() - loads AnimalType from registry
+    - NOTES: Incomplete implementation, links to AnimalTypeRegistry
+
+14. AnimalTypeRegistry.java (96 lines)
+    - Static registry of all AnimalType definitions
+    - Pattern: Similar to ItemRegistry/RecipeRegistry
+    - Key Methods:
+      * addAnimal() - adds to static list
+      * getAnimalTypes() - returns all
+      * getAnimalByName() - lookup by name
+    - JSON support: loadFromJson(), saveToJson()
+    - Singleton pattern with static List<AnimalType>
+
+15. Upgrade.java (5 lines)
+    - EMPTY PLACEHOLDER CLASS
+    - No implementation yet
+    - RECOMMENDATION: Delete or complete
+
+
+ENGINEDATATYPES PACKAGE (com.productionchain.enginedatatypes) - 5 files
+================================================================================
+16. ItemType.java (106 lines)
+    - Defines item properties/blueprint
+    - Fields: name, category, storage_space, weight, how_long_to_go_bad
+    - Fields: item_isDurable, item_isStorable, item_isTransportable (boolean flags)
+    - Getters for all properties
+    - NOTES: Missing setter methods, category-based classification
+
+17. ItemRegistry.java (111 lines)
+    - Static registry of all ItemType definitions
+    - Pattern: Singleton with static Map<String, ItemType>
+    - Key Methods:
+      * addItem() - register new item
+      * getItemType() - lookup by name
+      * getItemsByCategory() - filter by category
+      * isValidItem() - boolean check
+    - JSON support: loadFromJson(), saveToJson()
+    - Type: Map-based for O(1) lookups vs List
+
+18. Recipe.java (130 lines)
+    - Defines recipe/crafting blueprint
+    - Fields: name, category, description, n_ingredients, n_outputs
+    - Fields: ingredientslist, outputslist (IngredientsList)
+    - Fields: duration (double), enabled (boolean)
+    - Key Methods:
+      * getters for all fields
+      * setIngredientslist() - setter
+    - NOTES: Clean implementation, good category-based filtering support
+
+19. RecipeRegistry.java (92 lines)
+    - Static registry of all Recipe definitions
+    - Pattern: Singleton with static List<Recipe>
+    - Key Methods:
+      * addRecipe() - register recipe
+      * getRecipes() - all recipes
+      * getRecipeByName() - lookup
+      * getRecipesByCategory() - filter by category
+    - JSON support: loadFromJson(), saveToJson()
+    - NOTES: List-based (not Map) for category filtering efficiency
+
+20. IngredientPair.java (57 lines)
+    - Represents item + quantity pair
+    - Fields: item_name, count (double), probability
+    - Multiple constructors (3 overloads)
+    - Getters only, no setters
+    - NOTES: Has debug print in constructor
+
+21. IngredientsList.java (140 lines)
+    - Container for list of IngredientPair objects
+    - Fields: ingredientslist (List<IngredientPair>)
+    - Key Methods:
+      * add(), set(), get() - list operations
+      * size() - list size
+      * getIngredientslist() - returns full list
+      * SaveIngredientList() - save to JSON
+      * LoadFromFile() - load from JSON
+    - Implements @JsonValue and @JsonCreator for JSON handling
+
+
+DATATYPESOLD PACKAGE (com.productionchain.datatypesold) - 11 FILES (LEGACY - DELETE)
+================================================================================
+22. Building.java (91 lines) - LEGACY, use BuildingType
+23. BuildingList.java (160 lines) - LEGACY, use BuildingTypeList
+24. BuildingTypeRegistry.java (17 lines) - LEGACY, empty stub
+25. Item.java (106 lines) - LEGACY, use ItemType
+26. ItemList.java (194 lines) - LEGACY, use ItemRegistry
+27. Recipe.java (114 lines) - LEGACY, duplicate of enginedatatypes/Recipe.java
+28. RecipeList.java (212 lines) - LEGACY, use RecipeRegistry
+29. IngredientPair.java (57 lines) - LEGACY, duplicate of enginedatatypes version
+30. IngredientsList.java (131 lines) - LEGACY, duplicate of enginedatatypes version
+31. ProductionBuildingConfig.java (15 lines) - LEGACY, unused config class
+32. UpgradeRecipesPair.java (40 lines) - LEGACY, upgrade system placeholder
+
+
+MAIN/ROOT PACKAGE (com.productionchain) - 1 file
+================================================================================
+33. Main.java (186 lines)
+    - Entry point for the game
+    - Key Methods:
+      * main() - application entry point
+      * write_items_json() - creates and saves ItemRegistry
+      * write_recipes_json() - creates and saves RecipeRegistry
+      * write_production_building_types_json() - creates building types
+      * teste_initialize1() - comprehensive test execution
+      * teste_building_type_list() - (commented out)
+    - NOTES: 
+      * Contains all setup logic for test run
+      * Demonstrates game flow: create registries → instantiate buildings → execute recipes
+      * Good reference for API usage but should be refactored into proper tests
+
+
+RESOURCE FILES (src/main/resources/)
+================================================================================
+- ProductionBuildings.json - Configuration for production building types
+- AnimalBuildings.json - Configuration for animal building types
+- FILENAME.json - Unknown purpose
+- buildingtypes/ - Directory for additional building definitions
+
+
+TEST DATA FILES (Root level - various JSON test files)
+================================================================================
+- ItemRegistry_test.json
+- RecipeRegistry_test.json
+- ProductionBuildingRegistry_test.json
+- BuildingInstances_teste.json
+- AnimalBuildingInstances_teste.json
+- storage_teste.json
+- adv_storage_teste.json
+- receitas_teste.json
+- teste_building_.json
+- teste_building_2.json
+- buildings.json
+
+
+CONFIGURATION
+================================================================================
+pom.xml:
+  - groupId: com.productionchain
+  - artifactId: productionchainid
+  - version: 1.0-SNAPSHOT
+  - Java: 1.8 (source and target)
+  - Dependencies:
+    * Jackson Databind 2.17.0
+    * JUnit 4.11 (test scope, but not used)
+
+
+CRITICAL CODE LOCATIONS
+================================================================================
+Hardcoded Paths:
+  - BuildingInstance.java:71 - Windows absolute path
+  - AnimalBuildingType.java:94 - Windows absolute path
+  - ProductionBuildingType.java:113 - Windows path in JFileChooser
+
+Debug Statements:
+  - BuildingType.java:112 - println with @building type list
+  - IngredientPair.java:13 - println in constructor
+  - Various test methods in Main.java
+
+Magic Strings:
+  - BuildingInstance.java:60 - new ArrayList<>(Arrays.asList("Wood", "Stick"))
+  - Recipe categories hardcoded throughout
+  - Item names not in constants
+
+Incomplete Features:
+  - AnimalBuildingInstance.updateNextTurn() - UnsupportedOperationException
+  - Upgrade.java - empty class
+  - RecipeSystem.java - 60% commented out
+
+
+ARCHITECTURE NOTES
+================================================================================
+Patterns Used:
+  ✓ Inheritance (BuildingType/BuildingInstance hierarchy)
+  ✓ Composition (Buildings contain Storage, RecipeHandler)
+  ✓ Registry/Singleton (ItemRegistry, RecipeRegistry, etc.)
+  ✓ Generic Types (BuildingTypeList<T>)
+  ✓ Polymorphic JSON serialization (@JsonTypeInfo, @JsonSubTypes)
+  ✓ Jackson annotations for serialization
+
+Anti-patterns Found:
+  ✗ Static mutable state (registries as static fields)
+  ✗ Loading registries during deserialization (tight coupling)
+  ✗ Hardcoded paths (non-portable)
+  ✗ Debug statements in production code
+  ✗ Magic strings and numbers
+  ✗ Multiple constructor overloads with different behaviors
+  ✗ Commented-out code (entire classes)
+  ✗ Incomplete implementations (Upgrade, RecipeSystem)
+
