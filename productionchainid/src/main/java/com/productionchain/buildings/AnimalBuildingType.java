@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.productionchain.enginedatatypes.IngredientPair;
 import com.productionchain.enginedatatypes.Recipe;
 import com.productionchain.enginedatatypes.RecipeRegistry;
+import com.productionchain.enginedatatypes.ResourceLoader;
 import com.productionchain.mechanics.RecipeHandler;
 
 public class AnimalBuildingType extends BuildingType{
@@ -91,7 +92,7 @@ public class AnimalBuildingType extends BuildingType{
         System.out.println(AnimalBuildingRegistry);
 
 
-        String FILENAME = "C:\\Users\\Pedro\\Desktop\\Programas\\Production-Chain-Game\\productionchainid\\src\\main\\resources\\AnimalBuildings.json";
+        String FILENAME = ResourceLoader.getResourcePath("AnimalBuildings.json");
         AnimalBuildingRegistry.saveToJson(FILENAME);
     }
 }

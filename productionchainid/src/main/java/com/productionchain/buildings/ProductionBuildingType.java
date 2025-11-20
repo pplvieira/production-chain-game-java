@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.productionchain.enginedatatypes.IngredientPair;
 import com.productionchain.enginedatatypes.Recipe;
 import com.productionchain.enginedatatypes.RecipeRegistry;
+import com.productionchain.enginedatatypes.ResourceLoader;
 import com.productionchain.mechanics.RecipeHandler;
 
 
@@ -110,7 +111,7 @@ public class ProductionBuildingType extends BuildingType{
         // CHOSE DIRECTORY TO WRITE
         ///*
         //JFileChooser fileChooser = new JFileChooser();
-        JFileChooser fileChooser = new JFileChooser("C:\\Users\\Pedro\\Desktop\\Programas\\Production-Chain-Game\\productionchainid\\src\\main");
+        JFileChooser fileChooser = new JFileChooser(ResourceLoader.getResourceFolderPath("buildingtypes/ProductionBuildings.json"));
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "CHOSE DIRECTORY OF BUILDINGS JSONS", "gif");

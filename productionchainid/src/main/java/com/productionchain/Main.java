@@ -16,6 +16,7 @@ import com.productionchain.enginedatatypes.ItemType;
 import com.productionchain.enginedatatypes.Recipe;
 import com.productionchain.enginedatatypes.IngredientsList;
 import com.productionchain.enginedatatypes.RecipeRegistry;
+import com.productionchain.enginedatatypes.ResourceLoader;
 import com.productionchain.mechanics.RecipeHandler;
 
 public class Main {
@@ -93,7 +94,7 @@ public class Main {
 
         //final BuildingTypeList<ProductionBuildingType> productionBuildingRegistry;
         BuildingTypeList<ProductionBuildingType> productionBuildingRegistry = new BuildingTypeList<>(ProductionBuildingType.class);
-        //productionBuildingRegistry.loadFromJson("C:\\Users\\Pedro\\Desktop\\Programas\\Production-Chain-Game\\productionchainid\\src\\main\\resources\\buildingtypes\\ProductionBuildings.json");
+        //productionBuildingRegistry.loadFromJson(ResourceLoader.getResourcePath("buildingtypes/ProductionBuildings.json"));
         productionBuildingRegistry.loadFromJson("ProductionBuildingRegistry_test.json");
 
         //ItemRegistry itemreg = ;

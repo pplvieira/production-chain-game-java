@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.productionchain.enginedatatypes.IngredientPair;
 import com.productionchain.enginedatatypes.Recipe;
+import com.productionchain.enginedatatypes.ResourceLoader;
 import com.productionchain.mechanics.AdvancedStorage;
 import com.productionchain.mechanics.RecipeHandler;
 import com.productionchain.mechanics.RecipeSystem;
@@ -68,7 +69,7 @@ public abstract class BuildingInstance {
         System.out.println(">>> BuildingInstance(String typeName)");
         /// LOAD BUILDING TYPE REGISTRY
         BuildingTypeList<ProductionBuildingType> prodBuildingTypeList = new BuildingTypeList<>(ProductionBuildingType.class);
-        prodBuildingTypeList.loadFromJson("C:\\Users\\Pedro\\Desktop\\Programas\\Production-Chain-Game\\productionchainid\\src\\main\\resources\\buildingtypes\\ProductionBuildings.json");
+        prodBuildingTypeList.loadFromJson(ResourceLoader.getResourcePath("buildingtypes/ProductionBuildings.json"));
         
         if( prodBuildingTypeList.getBuildingByName(typeName) == null){
             System.out.println("[ERROR]: building '" + typeName + "' doesn't exist in registry!");
@@ -96,7 +97,7 @@ public abstract class BuildingInstance {
 
     public void resolveType() throws IOException {
         BuildingTypeList<ProductionBuildingType> prodBuildingTypeList = new BuildingTypeList<>(ProductionBuildingType.class);
-        prodBuildingTypeList.loadFromJson("C:\\Users\\Pedro\\Desktop\\Programas\\Production-Chain-Game\\productionchainid\\src\\main\\resources\\buildingtypes\\ProductionBuildings.json");
+        prodBuildingTypeList.loadFromJson(ResourceLoader.getResourcePath("buildingtypes/ProductionBuildings.json"));
         this.type = prodBuildingTypeList.getBuildingByName(this.typeName);
     }
 
@@ -279,11 +280,10 @@ public abstract class BuildingInstance {
             //getBuildingsByCategory<List<ProductionBuildingInstance>>() {}
         );
 
-        
+
         /// LOAD PRODUCTION BUILDING TYPES
-        String folderpath = "C:\\Users\\Pedro\\Desktop\\Programas\\Production-Chain-Game\\productionchainid\\src\\main\\resources\\buildingtypes";
         BuildingTypeList<ProductionBuildingType> productionList2 = new BuildingTypeList<>(ProductionBuildingType.class);
-        productionList2.loadFromJson(folderpath + "\\ProductionBuildings.json");
+        productionList2.loadFromJson(ResourceLoader.getResourcePath("buildingtypes/ProductionBuildings.json"));
         System.out.println("Loaded production buildings: " + productionList2.getBuildings().size());
 
 
