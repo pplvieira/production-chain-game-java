@@ -2,6 +2,14 @@
 
 Welcome to the Medieval Production Chain Game documentation. This directory contains comprehensive documentation for developers, maintainers, and end-users.
 
+The idea with this game is to implement a super advanced micromanagement production and trading game in a medieval setting. Implementing super realistic mechanics like 
+- a realistic, detailed, and historically accurate resource production trees, 
+- a labor system where workers spend their working hours executing tasks like recipes in production buildings, tending to animals and buildings maintenance, household chores, and transporting of goods
+- a free market governed by free trade between player lords and NPCs, where players can exchange goods at monetary or other goods prices set by the every-shifting market
+- a very technical, statistical and analytical approach to solving problems and taking decisions
+- a weather system and realistic interactions where real world events are simulated and influence mechanics in the gameplay
+
+
 ## 📁 Documentation Structure
 
 ### `/architecture`
