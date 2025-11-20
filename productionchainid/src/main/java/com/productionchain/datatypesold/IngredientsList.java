@@ -11,7 +11,12 @@ import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class IngredientsList {
+/**
+ * @deprecated This class is part of the legacy datatypesold package and should not be used.
+ * Use com.productionchain.enginedatatypes.IngredientsList instead.
+ */
+@Deprecated
+class IngredientsList {
     //@JsonProperty("ingredient_list") // ALERTA REMOVI ISTO
     //public ArrayList<Item> itemlist = new ArrayList<>();
     private List<IngredientPair> ingredientslist;

@@ -13,9 +13,12 @@ import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
-
-public class BuildingList {
+/**
+ * @deprecated This class is part of the legacy datatypesold package and should not be used.
+ * Use com.productionchain.buildings.BuildingTypeList instead.
+ */
+@Deprecated
+class BuildingList {
     //@JsonProperty("buildinglist") // ALERTA REMOVI 
 
     List<Building> buildinglist;

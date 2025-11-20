@@ -14,10 +14,13 @@ import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
-
+/**
+ * @deprecated This class is part of the legacy datatypesold package and should not be used.
+ * Use com.productionchain.enginedatatypes.ItemRegistry instead.
+ */
+@Deprecated
 //@JsonDeserialize(as = ArrayList.class)
-public class ItemList {
+class ItemList {
     @JsonProperty("itemlist")
     //public ArrayList<Item> itemlist = new ArrayList<>();
     public List<Item> itemlist; // = new ArrayList<>();

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.productionchain.datatypesold.IngredientPair;
+import com.productionchain.enginedatatypes.IngredientPair;
 import com.productionchain.enginedatatypes.Recipe;
 import com.productionchain.enginedatatypes.RecipeRegistry;
 import com.productionchain.mechanics.RecipeHandler;

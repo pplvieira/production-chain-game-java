@@ -18,7 +18,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.productionchain.enginedatatypes.Recipe;
 
-public class RecipeList {
+/**
+ * @deprecated This class is part of the legacy datatypesold package and should not be used.
+ * Use com.productionchain.enginedatatypes.RecipeRegistry instead.
+ */
+@Deprecated
+class RecipeList {
     //@JsonProperty("recipelist") // ALERTA REMOVI
 
     List<Recipe> recipelist;

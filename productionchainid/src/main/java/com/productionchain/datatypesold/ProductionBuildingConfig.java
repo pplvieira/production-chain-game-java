@@ -6,7 +6,12 @@ import com.productionchain.buildings.ProductionBuildingType;
 
 //import com.productionchain.buildingtypes.ProductionBuildingType;
 
-public class ProductionBuildingConfig {
+/**
+ * @deprecated This class is part of the legacy datatypesold package and should not be used.
+ * Use com.productionchain.buildings.BuildingTypeList instead.
+ */
+@Deprecated
+class ProductionBuildingConfig {
     private List<ProductionBuildingType> buildings;
 
     // Getters and Setters
