@@ -53,6 +53,9 @@ public class ConstantsTest {
     @Test(expected = UnsupportedOperationException.class)
     public void testItemConstantsCannotBeInstantiated() throws Exception {
         // Verify constants class cannot be instantiated
-        ItemConstants.class.getDeclaredConstructor().newInstance();
+        // First make the constructor accessible, then try to call it
+        java.lang.reflect.Constructor<ItemConstants> constructor = ItemConstants.class.getDeclaredConstructor();
+        constructor.setAccessible(true);
+        constructor.newInstance();
     }
 }
