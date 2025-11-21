@@ -20,35 +20,35 @@ public class AdvancedStorageTest {
     @Before
     public void setUp() {
         // Create storage that can hold Wood and Stone with 100 capacity
-        List<String> allowedItems = new ArrayList<>(Arrays.asList(ItemConstants.WOOD, ItemConstants.STONE));
+        ArrayList<String> allowedItems = new ArrayList<>(Arrays.asList(ItemConstants.WOOD, ItemConstants.STONE));
         storage = new AdvancedStorage(100.0, allowedItems);
     }
 
     @Test
     public void testAddItem_ValidItem_ItemAdded() {
         // Test adding a valid item
-        boolean result = storage.addItemCheckCapacity(ItemConstants.WOOD, 10, 5.0);
+        storage.addItemCheckCapacity(ItemConstants.WOOD, 10, 5.0);
 
-        assertTrue("Should successfully add item", result);
-        assertTrue("Storage should contain Wood", storage.hasItem(ItemConstants.WOOD));
+        assertTrue("Storage should contain Wood", storage.hasItem(ItemConstants.WOOD, 10));
         assertEquals("Should have correct quantity", 10.0, storage.getItemQuantity(ItemConstants.WOOD), 0.001);
     }
 
     @Test
-    public void testAddItem_ExceedsCapacity_ReturnsFalse() {
+    public void testAddItem_ExceedsCapacity_NotAdded() {
         // Test adding item that exceeds capacity
-        boolean result = storage.addItemCheckCapacity(ItemConstants.WOOD, 150, 1.0);
+        storage.addItemCheckCapacity(ItemConstants.WOOD, 150, 1.0);
 
-        assertFalse("Should reject item exceeding capacity", result);
+        // Item should not be added due to capacity constraint
         assertEquals("Should have no items", 0.0, storage.getItemQuantity(ItemConstants.WOOD), 0.001);
     }
 
     @Test
-    public void testAddItem_DisallowedItem_ReturnsFalse() {
+    public void testAddItem_DisallowedItem_NotAdded() {
         // Test adding an item not in the allowed list
-        boolean result = storage.addItemCheckCapacity(ItemConstants.COAL, 10, 1.0);
+        storage.addItemCheckCapacity(ItemConstants.COAL, 10, 1.0);
 
-        assertFalse("Should reject disallowed item", result);
+        // Item should not be added
+        assertEquals("Should not add disallowed item", 0.0, storage.getItemQuantity(ItemConstants.COAL), 0.001);
     }
 
     @Test
@@ -102,40 +102,42 @@ public class AdvancedStorageTest {
         storage.addItemCheckCapacity(ItemConstants.WOOD, 5, 3.0);
 
         // Test
-        assertTrue("Should return true for existing item", storage.hasItem(ItemConstants.WOOD));
-        assertFalse("Should return false for non-existent item", storage.hasItem(ItemConstants.COAL));
+        assertTrue("Should return true for existing item with sufficient quantity", storage.hasItem(ItemConstants.WOOD, 5));
+        assertTrue("Should return true for existing item with less than available", storage.hasItem(ItemConstants.WOOD, 3));
+        assertFalse("Should return false for more than available", storage.hasItem(ItemConstants.WOOD, 10));
+        assertFalse("Should return false for non-existent item", storage.hasItem(ItemConstants.COAL, 1));
     }
 
     @Test
     public void testGetUsedCapacity_MultipleItems_CorrectTotal() {
-        // Add multiple items
-        storage.addItemCheckCapacity(ItemConstants.WOOD, 10, 2.0);  // 20 capacity used
-        storage.addItemCheckCapacity(ItemConstants.STONE, 15, 3.0); // 45 capacity used
+        // Add multiple items (quantity determines capacity used, not durability)
+        storage.addItemCheckCapacity(ItemConstants.WOOD, 10, 2.0);  // 10 capacity used
+        storage.addItemCheckCapacity(ItemConstants.STONE, 15, 3.0); // 15 capacity used
 
-        // Total used: 65
-        assertEquals("Should calculate correct used capacity", 65.0, storage.getUsedCapacity(), 0.001);
+        // Total used: 25
+        assertEquals("Should calculate correct used capacity", 25.0, storage.getUsedCapacity(), 0.001);
     }
 
     @Test
     public void testGetAvailableCapacity_CorrectCalculation() {
         // Storage has 100 capacity
-        storage.addItemCheckCapacity(ItemConstants.WOOD, 10, 3.0); // 30 used
+        storage.addItemCheckCapacity(ItemConstants.WOOD, 30, 3.0); // 30 used
 
         // Available should be 70
         assertEquals("Should have 70 capacity available", 70.0, storage.getAvailableCapacity(), 0.001);
     }
 
     @Test
-    public void testCheckSpoilage_ExpiredItems_RemovedFromStorage() {
-        // Add items with durability
+    public void testDegradeItems_ExpiredItems_RemovedFromStorage() {
+        // Add items with durability of 5 turns
         storage.addItemCheckCapacity(ItemConstants.WOOD, 10, 5.0);
 
-        // Simulate passage of time (6 turns) - items should spoil
-        for (int i = 0; i < 6; i++) {
-            storage.checkSpoilage();
+        // Simulate passage of time (5 turns) - items should spoil after durability reaches 0
+        for (int i = 0; i < 5; i++) {
+            storage.degradeItems();
         }
 
-        // Items should be removed after exceeding durability
+        // Items should be removed after durability expires
         assertEquals("Spoiled items should be removed", 0.0, storage.getItemQuantity(ItemConstants.WOOD), 0.001);
     }
 

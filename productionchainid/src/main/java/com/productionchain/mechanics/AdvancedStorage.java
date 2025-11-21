@@ -142,6 +142,17 @@ public class AdvancedStorage { // extends Storage
         return totalAvailable >= quantity;
     }
 
+    /** Get total quantity of an item across all batches */
+    public double getItemQuantity(String itemName) {
+        if (!items.containsKey(itemName)) return 0.0;
+        return items.get(itemName).stream().mapToDouble(b -> b.quantity).sum();
+    }
+
+    /** Get available capacity */
+    public double getAvailableCapacity() {
+        return capacity - getUsedCapacity();
+    }
+
 
 
 
