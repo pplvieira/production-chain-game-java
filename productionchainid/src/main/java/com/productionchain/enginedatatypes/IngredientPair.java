@@ -12,18 +12,18 @@ public class IngredientPair {
     public IngredientPair(){
         System.out.println("||||| fui acionado");
         this.item_name = "";
-        this.count = 1;
-        this.probability = 1;
+        this.count = 0;
+        this.probability = 0;
     }
 
 
-    
+
     public IngredientPair(
-        @JsonProperty("item_name") String item_name, 
+        @JsonProperty("item_name") String item_name,
         @JsonProperty("count") double count){
         this.item_name = item_name;
         this.count = count;
-        this.probability = 1;
+        this.probability = 0;
     }
 
 

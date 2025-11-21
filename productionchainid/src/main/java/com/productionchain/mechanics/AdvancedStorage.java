@@ -25,7 +25,7 @@ public class AdvancedStorage { // extends Storage
     private ArrayList<String> allowedItems; // Optional: Allowed item types
 
     public AdvancedStorage() {
-        this.capacity = -1.0;
+        this.capacity = 0;
         this.items = new HashMap<>();
     }
 

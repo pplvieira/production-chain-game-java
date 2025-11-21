@@ -38,12 +38,12 @@ public class AnimalInstance {
         // System.out.println(">>> BuildingInstance(BuildingType type)");
         // System.out.println(type);
         this.typeName = type.getName();
-        this.gender = (Math.random() < 0.5) ? "male" : "female";
-        this.state  = "alive";
+        this.gender = "";
+        this.state  = "";
         this.age    = 0;
-        this.satisfaction = 100;
-        this.productivity = 100;
-        this.health       = 100;
+        this.satisfaction = 0;
+        this.productivity = 0;
+        this.health       = 0;
     }
 
     @JsonCreator

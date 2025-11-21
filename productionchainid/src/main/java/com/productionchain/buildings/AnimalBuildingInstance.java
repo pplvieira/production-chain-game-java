@@ -38,7 +38,7 @@ public class AnimalBuildingInstance extends BuildingInstance{
         //this.storage = new HashMap<>();
         //this.activeRecipe = null;
         this.housedAnimals = new ArrayList<>();
-        this.cleanliness   = 100;
+        this.cleanliness   = 0;
     }
 
     @JsonCreator

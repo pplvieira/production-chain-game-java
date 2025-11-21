@@ -57,8 +57,8 @@ public abstract class BuildingInstance {
         this.owner = owner;
         this.x = x;
         this.y = y;
-        this.condition = 100; // Default condition
-        this.storage = new AdvancedStorage(storageCap, new ArrayList<>(Arrays.asList("Wood", "Stick")));
+        this.condition = 0;
+        this.storage = new AdvancedStorage(storageCap, new ArrayList<>());
         //this.recipeSystem = new RecipeSystem();
         this.activeRecipe = null;
     }
@@ -83,8 +83,8 @@ public abstract class BuildingInstance {
         this.owner = owner;
         this.x = x;
         this.y = y;
-        this.condition = 100; // Default condition
-        this.storage = new AdvancedStorage(storageCap, new ArrayList<>(Arrays.asList("Wood", "Stick")));
+        this.condition = 0;
+        this.storage = new AdvancedStorage(storageCap, new ArrayList<>());
         this.activeRecipe = activeRecipe;
     }
 
