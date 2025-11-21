@@ -68,8 +68,8 @@ public abstract class BuildingType {
         this.description = "";
         this.category = "";
 
-        this.baseEfficiency = 0;
-        this.baseDegradationRate = 0;
+        this.baseEfficiency = 1;
+        this.baseDegradationRate = 1;
         this.buildingCost = new ArrayList<>();
 
         this.n_upgrades = n_upgrades;

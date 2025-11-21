@@ -12,8 +12,8 @@ public class IngredientPair {
     public IngredientPair(){
         System.out.println("||||| fui acionado");
         this.item_name = "";
-        this.count = 0;
-        this.probability = 0;
+        this.count = 1;
+        this.probability = 1;
     }
 
 
@@ -23,7 +23,7 @@ public class IngredientPair {
         @JsonProperty("count") double count){
         this.item_name = item_name;
         this.count = count;
-        this.probability = 0;
+        this.probability = 1;
     }
 
 

@@ -28,7 +28,7 @@ public class Storage {
 
     // CONSTRUCTORS
     public Storage() {
-        this.capacity = 0;
+        this.capacity = -1.0;
         this.storedItems = new HashMap<>();
         //this.allowedItems = new AbstractSet<String>(); // DONT EVEN INITIALIZE
     }
