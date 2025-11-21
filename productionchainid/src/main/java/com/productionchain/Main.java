@@ -18,6 +18,9 @@ import com.productionchain.enginedatatypes.IngredientsList;
 import com.productionchain.enginedatatypes.RecipeRegistry;
 import com.productionchain.enginedatatypes.ResourceLoader;
 import com.productionchain.mechanics.RecipeHandler;
+import com.productionchain.constants.ItemConstants;
+import com.productionchain.constants.RecipeConstants;
+import com.productionchain.constants.BuildingConstants;
 
 public class Main {
     public static void teste_building_type_list(){
@@ -47,13 +50,13 @@ public class Main {
 
     // =============================================================================
     public static void write_items_json(String jsonpath) throws IOException{
-        ItemRegistry.addItem(new ItemType("Wood", "Raw Material", 1.0, 10.0, 50.0, true, true, true));
-        ItemRegistry.addItem(new ItemType("Stone", "Raw Material", 1.0, 10.0, 50.0, true, true, true));
-        ItemRegistry.addItem(new ItemType("Coal", "Raw Material", 1.0, 8.0, 100.0, true, true, true));
+        ItemRegistry.addItem(new ItemType(ItemConstants.WOOD, ItemConstants.CATEGORY_RAW_MATERIAL, 1.0, 10.0, 50.0, true, true, true));
+        ItemRegistry.addItem(new ItemType(ItemConstants.STONE, ItemConstants.CATEGORY_RAW_MATERIAL, 1.0, 10.0, 50.0, true, true, true));
+        ItemRegistry.addItem(new ItemType(ItemConstants.COAL, ItemConstants.CATEGORY_RAW_MATERIAL, 1.0, 8.0, 100.0, true, true, true));
 
         ItemRegistry.addItem(new ItemType("Weat seed", "Seed", 0.1, 0.1, 12.0, true, true, true));
         ItemRegistry.addItem(new ItemType("Barley seed", "Seed", 0.1, 0.1, 12.0, true, true, true));
-        
+
 
         //System.out.println(ItemRegistry);
         ItemRegistry.saveToJson(jsonpath);
@@ -62,11 +65,11 @@ public class Main {
     // =============================================================================
     public static void write_recipes_json(String jsonpath) throws IOException{
 
-        RecipeRegistry.addRecipe(new Recipe("Chop wood", "Basic silviculture", "--", 0, 1, new IngredientsList(), new IngredientsList(new ArrayList<>(List.of(new IngredientPair("Wood", 1)))), 1.0, true));
-        RecipeRegistry.addRecipe(new Recipe("Mine stone", "Basic mining", "--", 0, 1, new IngredientsList(), new IngredientsList(new ArrayList<>(List.of(new IngredientPair("Stone", 10)))), 1.0, true));
-        RecipeRegistry.addRecipe(new Recipe("Mine coal", "Basic mining", "--", 0, 1, new IngredientsList(), new IngredientsList(new ArrayList<>(List.of(new IngredientPair("Coal", 5)))), 1.0, true));
-        
-        RecipeRegistry.addRecipe(new Recipe("Charcoal", "Basic kiln", "--", 1, 1, new IngredientsList(new ArrayList<>(List.of(new IngredientPair("Wood", 2)))), new IngredientsList(new ArrayList<>(List.of(new IngredientPair("Coal", 3)))), 1.0, true));
+        RecipeRegistry.addRecipe(new Recipe(RecipeConstants.RECIPE_CHOP_WOOD, RecipeConstants.CATEGORY_BASIC_SILVICULTURE, "--", 0, 1, new IngredientsList(), new IngredientsList(new ArrayList<>(List.of(new IngredientPair(ItemConstants.WOOD, 1)))), 1.0, true));
+        RecipeRegistry.addRecipe(new Recipe(RecipeConstants.RECIPE_MINE_STONE, RecipeConstants.CATEGORY_BASIC_MINING, "--", 0, 1, new IngredientsList(), new IngredientsList(new ArrayList<>(List.of(new IngredientPair(ItemConstants.STONE, 10)))), 1.0, true));
+        RecipeRegistry.addRecipe(new Recipe(RecipeConstants.RECIPE_MINE_COAL, RecipeConstants.CATEGORY_BASIC_MINING, "--", 0, 1, new IngredientsList(), new IngredientsList(new ArrayList<>(List.of(new IngredientPair(ItemConstants.COAL, 5)))), 1.0, true));
+
+        RecipeRegistry.addRecipe(new Recipe(RecipeConstants.RECIPE_CHARCOAL, RecipeConstants.CATEGORY_BASIC_KILN, "--", 1, 1, new IngredientsList(new ArrayList<>(List.of(new IngredientPair(ItemConstants.WOOD, 2)))), new IngredientsList(new ArrayList<>(List.of(new IngredientPair(ItemConstants.COAL, 3)))), 1.0, true));
 
         //System.out.println(RecipeRegistry);
         RecipeRegistry.saveToJson(jsonpath);
@@ -76,12 +79,12 @@ public class Main {
     // =============================================================================
     public static void write_production_building_types_json(String jsonpath) throws IOException{
         BuildingTypeList<ProductionBuildingType> productionBuildingTypeList = new BuildingTypeList<>(ProductionBuildingType.class);
-        // productionBuildingTypeList.addBuilding(new ProductionBuildingType("Hut", "---", "Hut", 1, 0, new ArrayList<>(List.of(new IngredientPair("Wood", 10))), 0, null, 1, new ArrayList<>(List.of("Basic silviculture"))));
-        // productionBuildingTypeList.addBuilding(new ProductionBuildingType("Mine", "-", "Mine", 1, 0, new ArrayList<>(List.of(new IngredientPair("Wood", 20))), 0, null, 1, new ArrayList<>(List.of("Basic mining"))));
-        // productionBuildingTypeList.addBuilding(new ProductionBuildingType("Kiln", "-", "Kiln", 1, 0, new ArrayList<>(List.of(new IngredientPair("Stone", 20))), 0, null, 1, new ArrayList<>(List.of("Basic kiln", "Basic silviculture"))));
-        productionBuildingTypeList.addBuilding(new ProductionBuildingType("Hut", "---", "Hut", 1, 0, new ArrayList<>(List.of(new IngredientPair("Wood", 10))), 0, null, new RecipeHandler(1, new ArrayList<>(List.of("Basic silviculture")))));
-        productionBuildingTypeList.addBuilding(new ProductionBuildingType("Mine", "-", "Mine", 1, 0, new ArrayList<>(List.of(new IngredientPair("Wood", 20))), 0, null, new RecipeHandler(1, new ArrayList<>(List.of("Basic mining")))));
-        productionBuildingTypeList.addBuilding(new ProductionBuildingType("Kiln", "-", "Kiln", 1, 0, new ArrayList<>(List.of(new IngredientPair("Stone", 20))), 0, null, new RecipeHandler(1, new ArrayList<>(List.of("Basic kiln", "Basic silviculture")))));
+        // productionBuildingTypeList.addBuilding(new ProductionBuildingType("Hut", "---", "Hut", 1, 0, new ArrayList<>(List.of(new IngredientPair(ItemConstants.WOOD, 10))), 0, null, 1, new ArrayList<>(List.of(RecipeConstants.CATEGORY_BASIC_SILVICULTURE))));
+        // productionBuildingTypeList.addBuilding(new ProductionBuildingType("Mine", "-", "Mine", 1, 0, new ArrayList<>(List.of(new IngredientPair(ItemConstants.WOOD, 20))), 0, null, 1, new ArrayList<>(List.of(RecipeConstants.CATEGORY_BASIC_MINING))));
+        // productionBuildingTypeList.addBuilding(new ProductionBuildingType("Kiln", "-", "Kiln", 1, 0, new ArrayList<>(List.of(new IngredientPair(ItemConstants.STONE, 20))), 0, null, 1, new ArrayList<>(List.of(RecipeConstants.CATEGORY_BASIC_KILN, RecipeConstants.CATEGORY_BASIC_SILVICULTURE))));
+        productionBuildingTypeList.addBuilding(new ProductionBuildingType(BuildingConstants.BUILDING_HUT, "---", BuildingConstants.BUILDING_HUT, 1, 0, new ArrayList<>(List.of(new IngredientPair(ItemConstants.WOOD, 10))), 0, null, new RecipeHandler(1, new ArrayList<>(List.of(RecipeConstants.CATEGORY_BASIC_SILVICULTURE)))));
+        productionBuildingTypeList.addBuilding(new ProductionBuildingType(BuildingConstants.BUILDING_MINE, "-", BuildingConstants.BUILDING_MINE, 1, 0, new ArrayList<>(List.of(new IngredientPair(ItemConstants.WOOD, 20))), 0, null, new RecipeHandler(1, new ArrayList<>(List.of(RecipeConstants.CATEGORY_BASIC_MINING)))));
+        productionBuildingTypeList.addBuilding(new ProductionBuildingType(BuildingConstants.BUILDING_KILN, "-", BuildingConstants.BUILDING_KILN, 1, 0, new ArrayList<>(List.of(new IngredientPair(ItemConstants.STONE, 20))), 0, null, new RecipeHandler(1, new ArrayList<>(List.of(RecipeConstants.CATEGORY_BASIC_KILN, RecipeConstants.CATEGORY_BASIC_SILVICULTURE)))));
     
         productionBuildingTypeList.saveToJson(jsonpath);
     }
@@ -102,8 +105,8 @@ public class Main {
         //System.out.println(ItemRegistry.getItemTypes()); //unnecessary
         System.out.println(RecipeRegistry.getRecipes());
         System.out.println(RecipeRegistry.getRecipes().size());
-        System.out.println(RecipeRegistry.getRecipesByCategory("Basic silviculture"));
-        System.out.println(RecipeRegistry.getRecipesByCategory("Basic mining"));
+        System.out.println(RecipeRegistry.getRecipesByCategory(RecipeConstants.CATEGORY_BASIC_SILVICULTURE));
+        System.out.println(RecipeRegistry.getRecipesByCategory(RecipeConstants.CATEGORY_BASIC_MINING));
         System.out.println(productionBuildingRegistry);
 
 
