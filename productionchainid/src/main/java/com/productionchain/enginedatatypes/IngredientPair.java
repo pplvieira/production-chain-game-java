@@ -52,6 +52,10 @@ public class IngredientPair {
     }
 
 
-    
+    @Override
+    public String toString() {
+        return String.format("IngredientPair[item=%s, count=%.1f, probability=%.2f]",
+            item_name, count, probability);
+    }
 
 }

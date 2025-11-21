@@ -124,7 +124,31 @@ public class Recipe {
 
     @Override
     public String toString(){
-        return "Recipe: " + this.name + " | "  + this.category + " | " + this.description + " | " + this.n_ingredients + " -> " + this.n_outputs + " | " + this.enabled;
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("Recipe[name=%s, category=%s, duration=%.1f, enabled=%b]",
+            name, category, duration, enabled));
+        result.append(String.format("\n  Description: %s", description));
+        result.append(String.format("\n  Recipe: %d ingredient(s) → %d output(s)", n_ingredients, n_outputs));
+
+        if (ingredientslist != null && ingredientslist.size() > 0) {
+            result.append("\n  Ingredients:");
+            for (int i = 0; i < ingredientslist.size(); i++) {
+                result.append(String.format("\n    [%d] %s", i, ingredientslist.get(i).toString()));
+            }
+        } else {
+            result.append("\n  Ingredients: (none - gathering recipe)");
+        }
+
+        if (outputslist != null && outputslist.size() > 0) {
+            result.append("\n  Outputs:");
+            for (int i = 0; i < outputslist.size(); i++) {
+                result.append(String.format("\n    [%d] %s", i, outputslist.get(i).toString()));
+            }
+        } else {
+            result.append("\n  Outputs: (none)");
+        }
+
+        return result.toString();
     }
 }
 

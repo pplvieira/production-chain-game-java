@@ -95,7 +95,14 @@ public class AnimalInstance {
 
     @Override
     public String toString() {
-        return "\nAnimal Instance: " + this.typeName  + " " + this.gender + " | Owner: " + this.owner +" ("+ this.x +","+ this.y + ") | " + this.satisfaction + "%/" + this.productivity + "%/" + this.health + "%" ;
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("AnimalInstance[type=%s, gender=%s, state=%s, age=%.1f]",
+            typeName, gender, state, age));
+        result.append(String.format("\n  Location: (%d,%d), Owner: %s",
+            x, y, owner != null ? owner : "N/A"));
+        result.append(String.format("\n  Stats: satisfaction=%.0f%%, productivity=%.0f%%, health=%.0f%%",
+            satisfaction, productivity, health));
+        return result.toString();
     }
 
 

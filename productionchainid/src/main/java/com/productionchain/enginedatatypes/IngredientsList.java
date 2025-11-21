@@ -134,7 +134,19 @@ public class IngredientsList {
     }
 
 
+    @Override
+    public String toString() {
+        if (ingredientslist == null || ingredientslist.isEmpty()) {
+            return "IngredientsList[size=0] (empty)";
+        }
 
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("IngredientsList[size=%d]", ingredientslist.size()));
+        for (int i = 0; i < ingredientslist.size(); i++) {
+            result.append(String.format("\n  [%d] %s", i, ingredientslist.get(i).toString()));
+        }
+        return result.toString();
+    }
 
 
 }

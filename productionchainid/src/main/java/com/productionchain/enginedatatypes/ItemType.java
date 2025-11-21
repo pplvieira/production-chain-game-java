@@ -96,8 +96,13 @@ public class ItemType {
 
     @Override
     public String toString(){
-    return "Name: " + name + "\n-Weights: " + weight
-                + "\n-Is durable: " + item_isStorable;
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("ItemType[name=%s, category=%s, weight=%.1f, storageSpace=%.1f]",
+            name, category != null ? category : "N/A", weight, storage_space));
+        result.append(String.format("\n  Flags: durable=%b, storable=%b, transportable=%b",
+            item_isDurable, item_isStorable, item_isTransportable));
+        result.append(String.format("\n  Spoilage: howLongToGoBad=%.1f turns", how_long_to_go_bad));
+        return result.toString();
     }
 
 

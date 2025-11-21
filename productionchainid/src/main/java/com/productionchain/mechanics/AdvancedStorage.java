@@ -212,14 +212,34 @@ public class AdvancedStorage { // extends Storage
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder("Advanced Storage: (" + this.getUsedCapacity() + "/" + this.capacity + " used)\n");
-        items.forEach((item, batches) -> {
-            result.append("  ").append(item).append(": ");
-            for (ItemBatch batch : batches) {
-                result.append(String.format("[%.1f units, %.0f turns] ", batch.quantity, batch.durability));
-            }
-            result.append("\n");
-        });
+        double used = this.getUsedCapacity();
+        double available = this.getAvailableCapacity();
+        int totalBatches = items.values().stream().mapToInt(List::size).sum();
+
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("AdvancedStorage[capacity=%.1f, used=%.1f, available=%.1f, items=%d, batches=%d]",
+            capacity, used, available, items.size(), totalBatches));
+
+        if (allowedItems != null && !allowedItems.isEmpty()) {
+            result.append("\n  Allowed Items: ").append(allowedItems);
+        }
+
+        if (!items.isEmpty()) {
+            result.append("\n  Storage Contents:");
+            items.forEach((item, batches) -> {
+                double totalQty = batches.stream().mapToDouble(b -> b.quantity).sum();
+                result.append(String.format("\n    - %s: %d batch(es), total=%.1f units",
+                    item, batches.size(), totalQty));
+                for (int i = 0; i < batches.size(); i++) {
+                    ItemBatch batch = batches.get(i);
+                    result.append(String.format("\n      * Batch[%d]: quantity=%.1f units, durability=%.0f turns",
+                        i, batch.quantity, batch.durability));
+                }
+            });
+        } else {
+            result.append("\n  Storage Contents: (empty)");
+        }
+
         return result.toString();
     }
 
