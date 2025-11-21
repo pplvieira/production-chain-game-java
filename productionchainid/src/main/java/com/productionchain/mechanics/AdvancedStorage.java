@@ -93,11 +93,16 @@ public class AdvancedStorage { // extends Storage
     /** Removes items, using the oldest batch first (FIFO) */
     public boolean removeItem(String itemName, double quantity) {
         if (!items.containsKey(itemName)) return false;
-        
+
+        // Check if we have enough total quantity (atomic operation - all or nothing)
+        if (!hasItem(itemName, quantity)) {
+            return false;
+        }
+
         //Queue<ItemBatch> batches = items.get(itemName);
         List<ItemBatch> batches = items.get(itemName);
         double remainingToRemove = quantity;
-        
+
         while (!batches.isEmpty() && remainingToRemove > 0) {
             //ItemBatch batch = batches.peek();
             ItemBatch batch = batches.get(0); // equivalent to peek || batches.isEmpty() ? null : batches.get(0);
@@ -110,12 +115,12 @@ public class AdvancedStorage { // extends Storage
                 // batches.poll(); // Remove expired batch
             }
         }
-        
+
         // If all batches are removed, clean up the entry
         if (batches.isEmpty()) {
             items.remove(itemName);
         }
-        
+
         return remainingToRemove == 0;
     }
 
