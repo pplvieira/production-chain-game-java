@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.productionchain.buildings.ProductionBuildingType;
 import com.productionchain.enginedatatypes.Recipe;
 import com.productionchain.enginedatatypes.RecipeRegistry;
 
@@ -75,6 +74,35 @@ public class RecipeHandler {
         // return baseRecipeCategories.stream()
         //     .flatMap(cat -> RecipeRegistry.getRecipesByCategory(category).stream()) // both were "category"
         //     .collect(Collectors.toList());
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("RecipeHandler[operations=%d, categories=%d]",
+            baseNumOperations, baseRecipeCategories.size()));
+
+        if (!baseRecipeCategories.isEmpty()) {
+            result.append("\n  Recipe Categories:");
+            for (int i = 0; i < baseRecipeCategories.size(); i++) {
+                result.append(String.format("\n    [%d] %s", i, baseRecipeCategories.get(i)));
+            }
+        } else {
+            result.append("\n  Recipe Categories: (none)");
+        }
+
+        List<Recipe> available = getAvailableRecipes();
+        result.append(String.format("\n  Available Recipes: %d", available.size()));
+        if (!available.isEmpty()) {
+            for (int i = 0; i < Math.min(5, available.size()); i++) {
+                result.append(String.format("\n    - %s", available.get(i).getName()));
+            }
+            if (available.size() > 5) {
+                result.append(String.format("\n    ... and %d more", available.size() - 5));
+            }
+        }
+
+        return result.toString();
     }
 }
 

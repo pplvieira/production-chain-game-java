@@ -19,6 +19,11 @@ public class RecipeRegistry {
         RecipeRegistry.recipes.add(recipe);
     }
 
+    /** Clears all recipes from the registry - useful for testing */
+    public static void clear() {
+        recipes.clear();
+    }
+
 
     public static List<Recipe> getRecipes(){
         return recipes;
@@ -30,6 +35,11 @@ public class RecipeRegistry {
         .filter(recipe -> recipe.getName().equals(name)) // Match name
         .findFirst() // Get the first match
         .orElse(null);
+    }
+
+    /** Checks if a recipe with the given name exists */
+    public static boolean recipeExists(String name) {
+        return getRecipeByName(name) != null;
     }
 
 

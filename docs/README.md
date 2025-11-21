@@ -68,11 +68,22 @@ When adding new documentation:
 ## 🔀 Version Control
 
 ### Semantic Versioning
-- Use semantic versioning (v1.0.0, v1.1.0, etc.)
-- Format: `vMAJOR.MINOR.PATCH`
-  - **MAJOR**: Incompatible API changes or major game overhauls
-  - **MINOR**: New features (corresponds to implementation phases)
-  - **PATCH**: Bug fixes, small improvements, iterative updates
+
+#### Format: `v1.1.X`
+- **First digit**: Always **1** (major version)
+- **Second digit**: Always **1** (for current development cycle v1.1.x)
+- **Third digit**: **Increments with EVERY commit** (v1.1.4, v1.1.5, v1.1.6...)
+
+#### Phase Completion Markers
+- **Phase notation** is added ONLY when a phase is manually marked complete
+- **Format**: `v1.1.X-phaseN` where X is the current commit number at completion
+- **Examples**:
+  - Working commits: v1.1.4 → v1.1.5 → v1.1.6 → v1.1.7
+  - Phase 1 complete: `v1.1.7-phase1` (manually marked)
+  - Continue working: v1.1.8 → v1.1.9 → ... → v1.1.22
+  - Phase 2 complete: `v1.1.22-phase2` (manually marked)
+
+**Key Rule**: The third digit ALWAYS increments with each commit, regardless of phase. Phase markers are added at completion milestones.
 
 ### Commit Conventions
 Use conventional commit prefixes for clarity:
@@ -83,15 +94,23 @@ Use conventional commit prefixes for clarity:
 - `docs:` - Documentation changes
 - `chore:` - Build tasks, dependency updates, maintenance
 
-**Format:** `<type>: v1.X.Y - <description>`
+**Format:** `<type>: v1.1.X - <description>`
 
-**Examples:**
+**Examples of regular commits:**
 ```
-feat: v1.1.0 - Add animal reproduction system
-fix: v1.1.1 - Correct storage capacity calculation bug
-refactor: v1.2.0 - Extract registry loading to service layer
-test: v1.2.1 - Add unit tests for RecipeHandler
-docs: v1.0.1 - Update API documentation for Building system
+feat: v1.1.5 - Add ResourceLoader utility class
+fix: v1.1.6 - Correct path resolution in BuildingInstance
+refactor: v1.1.8 - Extract constants to ItemConstants class
+test: v1.1.12 - Add unit tests for RecipeHandler
+docs: v1.1.3 - Update version numbering documentation
+```
+
+**Examples of phase completion commits:**
+```
+feat: v1.1.7-phase1 - Complete Phase 1: Cleanup & Refactoring
+feat: v1.1.22-phase2 - Complete Phase 2: Core Development
+feat: v1.1.45-phase3 - Complete Phase 3: Testing & Quality Assurance
+feat: v1.1.50-phase4 - Complete Phase 4: Documentation & Polish
 ```
 
 ### Branch Strategy
@@ -99,43 +118,58 @@ docs: v1.0.1 - Update API documentation for Building system
 feature/phase-N-description → develop → main
 ```
 
-- **Feature branches**: `feature/phase-1-cleanup`, `feature/phase-2-animal-system`
+- **Feature branches**: `feature/phase-1-cleanup`, `feature/phase-2-core-dev`
 - **Development branch**: `develop` - Integration and testing
 - **Main branch**: `main` - Production-ready code only
 - **Hotfix branches**: `hotfix/critical-bug-description` → `main` + `develop`
 
-### Version Numbering Convention
-- **X (MINOR)**: Corresponds to the implementation phase you are editing
-  - Phase 1 (Cleanup) → v1.1.0
-  - Phase 2 (Core Development) → v1.2.0
-  - Phase 3 (Testing) → v1.3.0
-  - Phase 4 (Documentation) → v1.4.0
-- **Y (PATCH)**: Increments with every iterative commit within that phase
-  - v1.1.1, v1.1.2, v1.1.3... (iterative patches in Phase 1)
+### Phase Targets (v1.1.x Development Cycle)
+Phases are workflow milestones, not version ranges:
+- **Phase 1** (Cleanup & Refactoring): Complete when all refactoring done
+- **Phase 2** (Core Development): Complete when all features implemented
+- **Phase 3** (Testing & QA): Complete when all tests pass
+- **Phase 4** (Documentation & Polish): Complete when documentation finalized
+
+Each phase completion is marked with a special commit (e.g., `v1.1.X-phase1`).
 
 ### Git Workflow Example
 ```bash
 # Create feature branch
 git checkout -b feature/phase-1-cleanup
 
-# Make changes and commit
+# Regular work commits (third digit increments each time)
 git add .
-git commit -m "refactor: v1.1.0 - Delete datatypesold package"
+git commit -m "refactor: v1.1.4 - Make datatypesold package package-private"
 
-# Iterative fix
-git commit -m "fix: v1.1.1 - Correct import statements after package deletion"
+git commit -m "feat: v1.1.5 - Add ResourceLoader utility class"
 
-# Another patch
-git commit -m "test: v1.1.2 - Add tests for registry loading"
+git commit -m "fix: v1.1.6 - Correct import statements after deprecation"
+
+git commit -m "refactor: v1.1.7 - Add SLF4J logging framework"
+
+# Phase 1 complete - manually mark completion
+git commit -m "feat: v1.1.7-phase1 - Complete Phase 1: Cleanup & Refactoring"
+
+# Continue with Phase 2 (version continues incrementing)
+git commit -m "feat: v1.1.8 - Add RegistryManager class"
+
+git commit -m "feat: v1.1.9 - Implement enhanced AdvancedStorage"
+
+# ... many more commits ...
+
+git commit -m "feat: v1.1.22 - Complete Player ownership system"
+
+# Phase 2 complete - manually mark completion
+git commit -m "feat: v1.1.22-phase2 - Complete Phase 2: Core Development"
 
 # Merge to develop
 git checkout develop
 git merge feature/phase-1-cleanup
 
-# After testing, merge to main
+# After testing, merge to main and tag major milestones
 git checkout main
 git merge develop
-git tag v1.1.2
+git tag v1.1.22-phase2
 ```
 
 ---

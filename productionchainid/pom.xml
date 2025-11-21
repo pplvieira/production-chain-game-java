@@ -28,6 +28,20 @@
       <version>2.17.0</version>
     </dependency>
 
+    <!-- SLF4J API -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>2.0.9</version>
+    </dependency>
+
+    <!-- Logback Classic (includes implementation) -->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.4.11</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -74,5 +88,31 @@
         </plugin>
       </plugins>
     </pluginManagement>
+
+    <plugins>
+      <!-- JaCoCo Code Coverage Plugin -->
+      <!-- Temporarily commented out - uncomment when network is available -->
+      <!--
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.10</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      -->
+    </plugins>
   </build>
 </project>

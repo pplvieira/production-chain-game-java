@@ -3,7 +3,12 @@ package com.productionchain.datatypesold;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class IngredientPair {
+/**
+ * @deprecated This class is part of the legacy datatypesold package and should not be used.
+ * Use com.productionchain.enginedatatypes.IngredientPair instead.
+ */
+@Deprecated
+class IngredientPair {
     String item_name;
     double count;
     double probability;

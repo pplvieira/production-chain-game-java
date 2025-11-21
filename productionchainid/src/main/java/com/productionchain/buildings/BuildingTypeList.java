@@ -13,6 +13,7 @@ import com.productionchain.enginedatatypes.IngredientPair;
 // import com.productionchain.enginedatatypes.RecipeRegistry;
 import com.productionchain.enginedatatypes.ItemRegistry;
 import com.productionchain.enginedatatypes.RecipeRegistry;
+import com.productionchain.enginedatatypes.ResourceLoader;
 import com.productionchain.mechanics.RecipeHandler;
 
 
@@ -87,9 +88,9 @@ public class BuildingTypeList<T extends BuildingType> {
             //List<ProductionBuildingType> edificios = new ArrayList<>();
             ProductionBuildingType edificioC = new ProductionBuildingType();
             //productionList.setBuildings(edificios);
-            //*/ 
+            //*/
 
-            String folderpath = "C:\\Users\\Pedro\\Desktop\\Programas\\Production-Chain-Game\\productionchainid\\src\\main\\resources\\buildingtypes";
+            String folderpath = ResourceLoader.getResourceFolderPath("buildingtypes/ProductionBuildings.json");
             // Load Production Buildings
             /*
             BuildingTypeList<ProductionBuildingType> productionList = new BuildingTypeList<>(ProductionBuildingType.class);

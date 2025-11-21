@@ -22,12 +22,22 @@ public class ItemRegistry {
         return itemTypes.get(name);
     }
 
+    /** Alias for getItemType() - retrieves item by name */
+    public static ItemType getItemByName(String name) {
+        return getItemType(name);
+    }
+
     public static Map<String, ItemType> getItemTypes() {
         return itemTypes;
     }
 
     public static boolean isValidItem(String name) {
         return itemTypes.containsKey(name);
+    }
+
+    /** Alias for isValidItem() - checks if item exists */
+    public static boolean itemExists(String name) {
+        return isValidItem(name);
     }
 
     /** Returns a list of all the item names of the chosen category  */
@@ -46,6 +56,11 @@ public class ItemRegistry {
     // SETTERS
     public static void addItem(ItemType itemType){
         ItemRegistry.itemTypes.put(itemType.getName(), itemType);
+    }
+
+    /** Clears all items from the registry - useful for testing */
+    public static void clear() {
+        itemTypes.clear();
     }
 
 

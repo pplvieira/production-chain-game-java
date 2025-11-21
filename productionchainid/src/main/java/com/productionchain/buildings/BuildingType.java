@@ -9,12 +9,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.productionchain.datatypesold.IngredientPair;
+import com.productionchain.enginedatatypes.IngredientPair;
 import com.productionchain.enginedatatypes.Recipe;
 import com.productionchain.enginedatatypes.RecipeRegistry;
 import com.productionchain.mechanics.RecipeHandler;
-
-//import com.productionchain.datatypesold.IngredientPair;
 
 
 
@@ -69,7 +67,7 @@ public abstract class BuildingType {
         this.name = "";
         this.description = "";
         this.category = "";
-        
+
         this.baseEfficiency = 1;
         this.baseDegradationRate = 1;
         this.buildingCost = new ArrayList<>();

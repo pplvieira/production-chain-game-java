@@ -12,6 +12,11 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.productionchain.buildings.BuildingType;
 import com.productionchain.enginedatatypes.ItemRegistry;
 
-public class BuildingTypeRegistry<T extends BuildingType> {
+/**
+ * @deprecated This class is part of the legacy datatypesold package and should not be used.
+ * Use com.productionchain.buildings.BuildingTypeList instead.
+ */
+@Deprecated
+class BuildingTypeRegistry<T extends BuildingType> {
     //-- UNIMPLEMENTED
 }

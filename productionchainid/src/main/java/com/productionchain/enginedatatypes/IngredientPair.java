@@ -17,9 +17,9 @@ public class IngredientPair {
     }
 
 
-    
+
     public IngredientPair(
-        @JsonProperty("item_name") String item_name, 
+        @JsonProperty("item_name") String item_name,
         @JsonProperty("count") double count){
         this.item_name = item_name;
         this.count = count;
@@ -52,6 +52,10 @@ public class IngredientPair {
     }
 
 
-    
+    @Override
+    public String toString() {
+        return String.format("IngredientPair[item=%s, count=%.1f, probability=%.2f]",
+            item_name, count, probability);
+    }
 
 }

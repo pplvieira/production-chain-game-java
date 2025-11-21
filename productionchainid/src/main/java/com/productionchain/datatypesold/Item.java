@@ -4,9 +4,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
+/**
+ * @deprecated This class is part of the legacy datatypesold package and should not be used.
+ * Use com.productionchain.enginedatatypes.ItemType instead.
+ */
+@Deprecated
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Item {
+class Item {
     // REMOVE O item_ DAQUI !!!
     
     String name;

@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class UpgradeRecipesPair {
+/**
+ * @deprecated This class is part of the legacy datatypesold package and should not be used.
+ * This class has no direct replacement in the new architecture.
+ */
+@Deprecated
+class UpgradeRecipesPair {
 
     String upgrade_name;
     ArrayList<String> recipes_enabled;
