@@ -50,12 +50,21 @@ public class ConstantsTest {
         assertEquals("BUILDING_MINE should equal 'Mine'", "Mine", BuildingConstants.BUILDING_MINE);
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testItemConstantsCannotBeInstantiated() throws Exception {
         // Verify constants class cannot be instantiated
-        // First make the constructor accessible, then try to call it
-        java.lang.reflect.Constructor<ItemConstants> constructor = ItemConstants.class.getDeclaredConstructor();
-        constructor.setAccessible(true);
-        constructor.newInstance();
+        try {
+            java.lang.reflect.Constructor<ItemConstants> constructor = ItemConstants.class.getDeclaredConstructor();
+            constructor.setAccessible(true);
+            constructor.newInstance();
+            fail("Should have thrown UnsupportedOperationException");
+        } catch (java.lang.reflect.InvocationTargetException e) {
+            // Reflection wraps the exception in InvocationTargetException
+            // Verify the underlying cause is UnsupportedOperationException
+            assertTrue("Should throw UnsupportedOperationException",
+                      e.getCause() instanceof UnsupportedOperationException);
+            assertEquals("This is a constants class and cannot be instantiated",
+                        e.getCause().getMessage());
+        }
     }
 }
